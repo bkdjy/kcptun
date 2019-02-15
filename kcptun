@@ -80,7 +80,7 @@ clear
 cat >&1 <<-'EOF'
 #########################################################
 # Kcptun 服务端一键安装脚本                               #
-# 该脚本支持 Kcptun服务端的安装、更新、卸载及配置          #
+# 该脚本支持 Kcptun 服务端的安装、更新、卸载及配置          #
 # 脚本作者: Index                                        #
 #########################################################
 EOF
@@ -88,8 +88,11 @@ EOF
 # 打印帮助信息
 usage() {
 	cat >&1 <<-EOF
+
 	请使用: $0 <option>
+
 	可使用的参数 <option> 包括:
+
 	    install          安装
 	    uninstall        卸载
 	    update           检查更新
@@ -100,9 +103,11 @@ usage() {
 	    show <id>        显示实例详细配置
 	    log <id>         显示实例日志
 	    del <id>         删除一个实例
+
 	注: 上述参数中的 <id> 可选, 代表的是实例的ID
 	    可使用 1, 2, 3 ... 分别对应实例 kcptun, kcptun2, kcptun3 ...
 	    若不指定 <id>, 则默认为 1
+
 	Supervisor 命令:
 	    service supervisord {start|stop|restart|status}
 	                        {启动|关闭|重启|查看状态}
@@ -387,6 +392,7 @@ download_file() {
 				2. 将文件重命名为 $(basename "$file")
 				3. 上传文件至目录 $(dirname "$file")
 				4. 重新运行安装脚本
+
 				注: 文件目录 . 表示当前目录，.. 表示当前目录的上级目录
 				EOF
 			fi
@@ -793,6 +799,7 @@ install_supervisor() {
 		已安装的 Supervisor 配置文件路径为: /etc/supervisord.conf
 		通过本脚本安装的 Supervisor 配置文件路径为: /etc/supervisor/supervisord.conf
 		你可以使用以下命令来备份原有配置文件:
+
 		    mv /etc/supervisord.conf /etc/supervisord.conf.bak
 		EOF
 
@@ -865,17 +872,21 @@ install_supervisor() {
 		cat >&2 <<-EOF
 		未找到已安装的 pip 命令，请先手动安装 python-pip
 		本脚本自 v21 版开始使用 pip 来安装 Supervisior。
+
 		1. 对于 Debian 系的 Linux 系统，可以尝试使用：
 		  sudo apt-get install -y python-pip 来进行安装
+
 		2. 对于 Redhat 系的 Linux 系统，可以尝试使用：
 		  sudo yum install -y python-pip 来进行安装
 		  * 注：如果提示未找到该软件，请先使用以下命令来安装扩展软件仓库：
 		      sudo yum install -y epel-release
 		    然后再次安装 python-pip
+
 		3. 如果以上方法都失败了，请使用以下命令来手动安装：
 		  wget -qO- --no-check-certificate https://bootstrap.pypa.io/get-pip.py | python
 		  * python 2.6 的用户请使用：
 		    wget -qO- --no-check-certificate https://bootstrap.pypa.io/2.6/get-pip.py | python
+
 		pip 安装完毕之后，请重新运行安装脚本。
 		EOF
 		exit 1
@@ -2145,6 +2156,7 @@ show_version_and_client_url() {
 	version="$(get_installed_version)"
 	if [ -n "$version" ]; then
 		cat >&1 <<-EOF
+
 		当前安装的 Kcptun 版本为: ${version}
 		EOF
 	fi
@@ -2223,6 +2235,7 @@ show_current_instance_info() {
 		"nc" "acknodelay" "sockbuf" "keepalive"
 
 	cat >&1 <<-EOF
+
 	可使用的客户端配置文件为:
 	${client_config}
 	EOF
@@ -2256,8 +2269,10 @@ show_current_instance_info() {
 		"nc" "acknodelay" "sockbuf" "keepalive"
 
 	cat >&1 <<-EOF
+
 	手机端参数可以使用:
 	  ${mobile_config}
+
 	EOF
 }
 
@@ -2275,6 +2290,7 @@ do_install() {
 	enable_supervisor
 
 	cat >&1 <<-EOF
+
 	恭喜! Kcptun 服务端安装成功。
 	EOF
 
@@ -2282,11 +2298,15 @@ do_install() {
 
 	cat >&1 <<-EOF
 	Kcptun 安装目录: ${KCPTUN_INSTALL_DIR}
+
 	已将 Supervisor 加入开机自启,
 	Kcptun 服务端会随 Supervisor 的启动而启动
+
 	更多使用说明: ${0} help
+
 	如果这个脚本帮到了你，你可以请作者喝瓶可乐:
 	  https://blog.kuoruan.com/donate
+
 	享受加速的快感吧！
 	EOF
 }
@@ -2601,6 +2621,7 @@ instance_log() {
 			fi
 		else
 			cat >&2 <<-EOF
+
 			参数有误, 请使用 $0 log <id>
 			<id> 为实例ID, 当前共有 $(get_instance_count) 个实例
 			EOF
@@ -2712,6 +2733,7 @@ instance_reconfig() {
 	fi
 
 	cat >&1 <<-EOF
+
 	恭喜, Kcptun 服务端配置已更新!
 	EOF
 	show_current_instance_info
