@@ -1,5 +1,6 @@
 #!/bin/bash
 
+: <<-'EOF'
 Copyright 2017-2019 Xingwang Liao <kuoruan@gmail.com>
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -76,7 +77,7 @@ run_user='kcptun'
 
 clear
 
-cat >
+cat ><<-'EOF'
 #########################################################
 # Kcptun 服务端一键安装脚本                               #
 # 该脚本支持 Kcptun服务端的安装、更新、卸载及配置          #
